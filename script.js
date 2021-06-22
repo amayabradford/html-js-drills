@@ -22,11 +22,18 @@ function addName() {
   // - https://www.w3schools.com/jsref/prop_node_innertext.asp
 
   let nameElement = document.querySelector('#name');
-  nameElement.innerText = 'See script.js!';
+  nameElement.innerText = 'Amaya';
 }
 
 function addFavoriteThings() {
   console.log('Called addFavoriteThings()');
+  let favThings = document.querySelector('#favthings');
+  console.log(favThings);
+  favThings.innerHTML=`
+  <li> Video Games </li>
+  <li> Cooking </li>
+  <li> Playing Guitar </li>
+  <li> Traveling </li>`;
 
   // 1. Get a reference to <ul id="favthings">
   // 2. Create a few list items representing your favorite things
@@ -40,6 +47,9 @@ function addFavoriteThings() {
 
 function replaceImage() {
   console.log('Called replaceImage()');
+  let newImage = document.getElementById("picture");
+  console.log(newImage);
+  newImage.setAttribute("src","images.jpg");
 
   // Change the puppy picture to a picture of your choosing
 
@@ -50,6 +60,9 @@ function replaceImage() {
 
 function changeCodeStatus() {
   console.log('Called changeCodeStatus()');
+let codeStatus = document.getElementById("codestatus");
+console.log(codeStatus);
+codeStatus.innerHTML=`<img src="meme.jpg" alt="coding meme" width=200px height=200px >`;
 
   // 1. Get a reference to <div id="codestatus">
   // 2. Create image element containing a sweet ol' meme
@@ -87,6 +100,37 @@ let informationForm = document.querySelector('#information-form');
 // Do something when form is submitted
 informationForm.addEventListener('submit', function(event) {
   event.preventDefault(); // You will want this here. Remove it and see what changes.
+  console.log(event.target);
+  const formData = new FormData(event.target);
+  console.log(formData);
+  const formProps = Object.fromEntries(formData);
+  console.log(formProps);
+
+  document.getElementById("firstname").innerHTML= formProps.fname;
+  document.getElementById("lastname").innerHTML= formProps.lname;
+  document.getElementById("chosencar").innerHTML= formProps.cars;
+  document.getElementById("icecreamstatus").innerHTML= formProps.icecream;
+
+  let humanCheck = document.querySelector('#humancheck').checked;
+  let coderCheck = document.querySelector('#codercheck').checked;
+  console.log(humanCheck);
+  console.log(coderCheck);
+
+  // if(humanCheck){
+  //   let div = document.createElement('div');
+  //   div.innerText = "This person is a coder";
+  //   document.querySelector('#checks').appendChild(div);
+  // }
+
+  // if(coderCheck){
+  //   let div = document.createElement('div');
+  //   div.innerText = "This person is a human";
+  //   document.querySelector('#checks').appendChild(div);
+  // }
+
+  document.querySelector('#checks').innerHTML= `
+  <div>This person is a human: ${humanCheck}</div>
+  <div>This person is a coder: ${coderCheck}</div>`;
 
   console.log('Form submitted');
 
@@ -111,23 +155,23 @@ informationForm.addEventListener('submit', function(event) {
 // then log something to the console
 
 // Fill in ________ to get a reference to the correct button on the page
-let consoleLogButton = document.querySelector('#________');
+// let consoleLogButton = document.querySelector('#________');
 
 // Log something when that button is clicked
-consoleLogButton.addEventListener('click', function() {
-  console.log('Change this text if you want!');
-});
+// consoleLogButton.addEventListener('click', function() {
+//   console.log('Change this text if you want!');
+// });
 
-let makeBlueButton = document.querySelector('#________');
-makeBlueButton.addEventListener('click', function() {
+// let makeBlueButton = document.querySelector('#________');
+// makeBlueButton.addEventListener('click', function() {
   // Your job:
   //  1. When a user clicks "Change the text to the right blue"
   //  2. Change the text in <div id="colorText">...</div> to blue
-});
+// });
 
 // Adding an event listener to document means the "keydown" event
 // can happen anywhere on the page and we'll respond.
-document.addeventListener('keydown', function() {
+ document.addEventListener('keydown', function() {
   // This is called whenever a user pressed any key.
 
   // Your job:
@@ -137,7 +181,7 @@ document.addeventListener('keydown', function() {
   // See:
   // - https://developer.mozilla.org/en-US/docs/Web/API/Document/keydown_event
   // - https://javascript.info/keyboard-events
-});
+ });
 
 /*************************************
  * Section 4 - TODO List             *
@@ -154,7 +198,17 @@ document.addeventListener('keydown', function() {
  *   it is next to.
  */
 
-// Your code goes here
+ let toDoListForm = document.querySelector(".form");
+ console.log('todolistform',toDoListForm);
+ toDoListForm.addEventListener("submit", function (event) {
+   event.preventDefault();
+  let toDoItem = document.querySelector("#todo").value;
+  console.log(toDoItem);
+  let ul = document.querySelector('#todos');
+  let li = document.createElement('li');
+  li.innerText= toDoItem;
+  ul.appendChild(li);
+ });
 
 /****************************************
  * Section 5 - setInterval + setTimeout *
