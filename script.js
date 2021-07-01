@@ -155,23 +155,30 @@ informationForm.addEventListener('submit', function(event) {
 // then log something to the console
 
 // Fill in ________ to get a reference to the correct button on the page
-// let consoleLogButton = document.querySelector('#________');
+let consoleLogButton = document.querySelector('#console-log-button');
+
 
 // Log something when that button is clicked
-// consoleLogButton.addEventListener('click', function() {
-//   console.log('Change this text if you want!');
-// });
+consoleLogButton.addEventListener('click', function() {
+   console.log('I changed the text!');
+});
 
-// let makeBlueButton = document.querySelector('#________');
-// makeBlueButton.addEventListener('click', function() {
+ let makeBlueButton = document.querySelector('#make-blue-button');
+ makeBlueButton.addEventListener('click', function() {
+  let colorText = document.getElementById("colorText");
+  colorText.style.color = "blue";
   // Your job:
   //  1. When a user clicks "Change the text to the right blue"
   //  2. Change the text in <div id="colorText">...</div> to blue
-// });
+});
 
 // Adding an event listener to document means the "keydown" event
 // can happen anywhere on the page and we'll respond.
- document.addEventListener('keydown', function() {
+ document.addEventListener('keydown', function(event) {
+   console.log(event.code);
+   if(event.code=="KeyR"){
+     document.querySelector("#colorText").style.color ="red";
+   }
   // This is called whenever a user pressed any key.
 
   // Your job:
@@ -228,6 +235,16 @@ informationForm.addEventListener('submit', function(event) {
  */
 
 // Your code goes here
+let secondsDisplay = document.getElementById("seconds");
+var secondsPassed = 0;
+function timeGoes(){
+    secondsPassed++;
+    secondsDisplay.innerText = secondsPassed;
+    if(secondsPassed==5){
+        document.getElementById("delayedDisplay").innerText = "5 seconds have passed!"
+    }
+}
+setInterval(timeGoes,1000);
 
 /****************************************
  * Section 6 - Your own section!        *
@@ -238,7 +255,11 @@ informationForm.addEventListener('submit', function(event) {
  *   Use a JavaScript event listener that is new to you.
  *   Here is a handy list: https://developer.mozilla.org/en-US/docs/Web/Events
  *   Click on each event listener to see an example of how it is used
- *
  */
 
 // Your code goes here
+const video = document.querySelector("#videoPlay");
+
+video.addEventListener('volumechange', (event) => {
+  console.log('The volume changed.');
+});
